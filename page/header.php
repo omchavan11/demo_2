@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php //session_start(); 
+    <?php //session_start();
         //error_reporting(E_ALL);
     ?>
-<?php include ('saveUsers.php'); ?> 
-    
+<?php //include ('saveUsers.php'); ?>
+<?php include ('common/function.php');?>
+<?php
+//if($_session['loggedin']==true){
+//session_start(); //Start the current session
+//} else{
+session_destroy(); //Destroy it! So we are logged out now
+//}
+logout();
+header("location:login.php");
+?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -207,15 +217,21 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            <a class="nav-link dropdown-toggle" href="login.php" id="userDropdown" role="button"
+                                 aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">LogOut</span>
+                                <!-- <img class="img-profile rounded-circle" src="img/undraw_profile.svg"> -->
+                                
                             </a>
+                            <!-- <a class="dropdown-item" href="login.php" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a> -->
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <!-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -226,26 +242,26 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                </a> -->
+                                <!-- <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="login.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
+                                </a> -->
                             </div>
                         </li>
                     </ul>
                 </nav>
-  
+
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                 
-                    <?php 
+
+                    <?php
                         // if(isset($_SESSION['storeUser']) && $_SESSION['storeUser'] !=''){
-                        // //if($insert){    
+                        // //if($insert){
                         //     echo "  <div class='alert alert-success alert-dismissible fade show' role='alert'>
                         //                 <strong>Success!</strong> Your note has been inserted successfully
                         //                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -253,7 +269,7 @@
                         //                 </button>
                         //             </div>";
                         // }
-                        // 
+                        //
                         if(isset($_SESSION['storeUser']))
                         {
                             ?>
@@ -265,22 +281,12 @@
                                      </div>
                             <?php
                            // echo $_SESSION['storeUser'];
-                            unset($_SESSION['storeUser']); 
+                            unset($_SESSION['storeUser']);
                         }
                     ?>
 
                     <?php
-                //   if(isset($_SESSION['updateUser']) && $_SESSION['updateUser'] === true){
 
-                //     //if(isset($update) && $update==true){
-                //        // if($update){    
-                //         echo "<div class='alert alert-info alert-dismissible fade show' role='alert'>
-                //         <strong>Success!</strong> Your note has been update successfully
-                //         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                //         <span aria-hidden='true'>×</span>
-                //         </button>
-                //     </div>";
-                //     }
                     if(isset ($_SESSION['updateUser']))
                     {
                         ?>
@@ -295,17 +301,7 @@
                     }
                    ?>
                     <?php
-                    // //if(isset($delete) && $delete==true){
-                    //     //if($delete){    
-                    //         if(isset($_SESSION['deleteUser']) && $_SESSION['deleteUser'] === true){
 
-                    //     echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-                    //     <strong>Success!</strong> Your note has been delete successfully
-                    //     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    //     <span aria-hidden='true'>×</span>
-                    //     </button>
-                    // </div>";
-                    // }
                     if(isset($_SESSION['deleteUser']))
                     {
                         ?>
@@ -319,4 +315,3 @@
                         unset($_SESSION['deleteUser']);
                     }
                 ?>
-                    

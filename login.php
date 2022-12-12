@@ -1,31 +1,34 @@
-<?php //include ('page/conn.php');?>
+<?php include ('page/conn.php');?>
 <?php  //include ('log.php');?>
 
 
 <?php
 $login = false;
- $showError = false;
+$showError = false;
+include('common/function.php');
+error_reporting(E_ALL);
+
 if($_SERVER["REQUEST_METHOD"] == 'POST'){
    // if (isset( $_POST['name'])){
         include 'page/conn.php';
        
           $name = $_POST ["name"];
-          $Email = $_POST["Email"];
+          $pass = $_POST["pass"];
           
 
-          $sql= "SELECT * FROM users WHERE name ='$name' AND Email ='$Email'";
+          $sql= "SELECT * FROM users WHERE name ='$name' AND pass ='$pass'";
           
             $result= mysqli_query($conn , $sql);
             $num= mysqli_num_rows($result);
              if ($num == 1)
                 {
                     //while($row = mysqli_fetch_assoc($result)){
-                    //if (password_verify($Email, $row['Email'])){ 
+                    //if (password_verify($pass, $row['pass'])){ 
                         $login = true;
-                        session_start();
-                        $_SESSION['loggedin']= true;
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['successMessage'] = 'Login successfull';
                         $_SESSION['name']= $name;
-                        $_SESSION['Email']= $Email;
+                        $_SESSION['pass']= $pass;
                         header("Location: index.php");
     
                     // }else{
@@ -34,9 +37,11 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                     //}
                 }
                 else{
-                    $showError = "Invalid Credentials";
+                    $_SESSION['loggedin'] = false;
+                    $_SESSION['loginErrorMessage'] = 'Invalid credentials';
                 }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -80,28 +85,17 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                            <!-- // <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
                             <div class="col-lg-12">
                                 <?php
-    if($login){
-    echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> You are logged in
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> ';
-    }
-    if($showError){
-    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> '. $showError.'
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div> ';
-    }
-    ?>
+                                
+                                    if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true){
+                                        showError();
+                                        session_destroy();
+                                    }
+                                ?>
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" action="login.php" method="POST">
+                                    <form class="user" action="index.php" method="POST">
                                         <div class="form-group">
                                             <input type="name" class="form-control form-control-user"
                                                 id="name" name="name" 
@@ -109,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="Email" name="Email" placeholder="password">
+                                                id="pass" name="pass" placeholder="password">
                                                 
                                         </div>
                                         <div class="form-group">
@@ -151,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+<?php //session_destroy(); ?>
 </body>
 
 </html>

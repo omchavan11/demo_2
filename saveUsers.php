@@ -3,7 +3,7 @@
 
 <?php
 
-  session_start();
+  //session_start();
 
   if(isset($_GET['delete'])){
     $sno = $_GET['delete'];

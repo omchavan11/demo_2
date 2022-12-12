@@ -1,3 +1,31 @@
+<?php
+  $showAlert= false;
+  $showerror= false;
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+        include 'page/conn.php';
+        $name = $_POST["name"];
+        $Email = $_POST["Email"];
+        $pass = $_POST["pass"];
+        $cpass = $_POST["cpass"];
+        $exists = false;
+        if(($pass == $cpass) && $exists == false){
+            $sql ="INSERT INTO `users` (`sno`, `name`, `Email`, `pass`)
+             VALUES (NULL, '$name ', '$Email', '$pass')";
+             $result= mysqli_query($conn,$sql);
+             if ($result){
+                         $showAlert = true;
+             }
+            }
+            else{
+                $showerror="Password do not matched";
+            }
+
+
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,26 +60,42 @@
                 <div class="row">
                     <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
                     <div class="col-lg-12">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                            </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="Fname" name="Fname"
+                        <?php 
+                        if($showAlert){
+                            echo '
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> You are logged in
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';  }
+                            if($showerror){
+                                echo '
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong> '.$showerror.'
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>';  }
+                        ?>  
+
+                            <div class="p-5">
+                                <div class="text-center">
+                                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                        </div>
+                                        <form class="user" action="register.php" method="POST">
+                                     <div class="form-group row">
+                                        <div class="col-sm-12 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="name" name="name"
                                             placeholder="First Name">
+                                         </div>
+                                         
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="Lname" name ="Lname"
-                                            placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="Email"
+                                     <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="Email" name="Email"
                                         placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
+                                 </div>
+                                      <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
                                             id="pass"  name ="pass"placeholder="Password">
@@ -61,10 +105,8 @@
                                             id="cpass" name="cpass" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <a href="login.php" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                
+                               
+                                <button type="submit"  class="btn btn-primary btn-user btn-block">Register Account</button>
                             </form>
                             <hr>
                             <div class="text-center">
