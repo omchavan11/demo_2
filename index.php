@@ -8,8 +8,6 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
     exit;
 }
 ?>
-
-
 <?php
     
     if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
