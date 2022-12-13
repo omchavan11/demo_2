@@ -42,9 +42,8 @@ function logout()
 {
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
    // session_start();
-    //session_distroy();
-    // unset($_SESSION["id"]);
-    // unset($_SESSION["name"]);
+
+    session_distroy();
     header("Location:login.php");
     }
 }
