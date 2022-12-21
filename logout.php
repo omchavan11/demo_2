@@ -1,28 +1,12 @@
-<?php  //include('common/function.php'); ?>
+<?php  
 
-<?php
-            session_start();
-        
-            session_destroy();
-            session_unset();
-            header("location: login.php");
-            exit;
+include('common/function.php');
 
-//             if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-//                 $_SESSION['loggedin'] = false;
-//                // $_SESSION['loginmessage'] = 'Unauthorized';
-//                 logout();
-//                 session_unset();
-//                 session_destroy();
-//                 header("location: login.php");
-//                 exit;
-//             }    
-  
-// ?>
-<?php
-// session_start();
-// session_unset();
-// // unset($_SESSION["id"]);
-// // unset($_SESSION["name"]);
-// header("Location:login.php");
+    // remove all session variables
+    session_unset();
+    // destroy the session
+    session_destroy();
+
+    // print_r($_SESSION);exit;
+    header("location:login.php");
 ?>

@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php //session_start();
-        //error_reporting(E_ALL);
-    ?>
-<?php //include ('saveUsers.php'); ?>
-<?php include ('common/function.php');?>
-<?php
-//if($_session['loggedin']==true){
-//session_start(); //Start the current session
-//} else{
-session_destroy(); //Destroy it! So we are logged out now
-//}
-logout();
-header("location:login.php");
-?>
 
+
+<?php include('saveUsers.php'); ?>
 <head>
+
+<script>
+        function validation(){
+                var name= document.forms["addform"]["name"] . value;
+                if (name == ""){
+                    alert("please insert name");
+                    return false;
+                }     
+
+                var email= document.forms["addform"]["email"] . value;
+                if (email == ""){
+                    alert("please insert Email");
+                    return false;
+                }     
+
+                var status= document.forms["addform"]["status"] . value;
+                if (status == ""){
+                    alert("please insert status");
+                    return false;
+                }     
+
+                var role= document.forms["addform"]["role"] . value;
+                if (role == ""){
+                    alert("please insert role");
+                    return false;
+                }     
+        }
+    </script>
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,15 +41,17 @@ header("location:login.php");
     <meta name="author" content="">
     <title>E_portal</title>
 
+    
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+        <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    
+  
 </head>
 
 <body id="page-top">
@@ -64,11 +84,11 @@ header("location:login.php");
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                              <div class="input-group-append">
+                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+                                 </button>
+                              </div>
                         </div>
                     </form>
 
@@ -217,37 +237,17 @@ header("location:login.php");
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="login.php" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="logout.php" id="userDropdown" role="button"
                                  aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">LogOut</span>
-                                <!-- <img class="img-profile rounded-circle" src="img/undraw_profile.svg"> -->
                                 
                             </a>
-                            <!-- <a class="dropdown-item" href="login.php" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a> -->
+                          
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <!-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a> -->
-                                <!-- <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.php" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a> -->
+                               
                             </div>
                         </li>
                     </ul>
@@ -255,21 +255,13 @@ header("location:login.php");
 
                 <!-- End of Topbar -->
 
+            
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
 
                     <?php
-                        // if(isset($_SESSION['storeUser']) && $_SESSION['storeUser'] !=''){
-                        // //if($insert){
-                        //     echo "  <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                        //                 <strong>Success!</strong> Your note has been inserted successfully
-                        //                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        //                     <span aria-hidden='true'>×</span>
-                        //                 </button>
-                        //             </div>";
-                        // }
-                        //
+                       
                         if(isset($_SESSION['storeUser']))
                         {
                             ?>

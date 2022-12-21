@@ -4,13 +4,13 @@
 if($_SERVER["REQUEST_METHOD"] == "POST"){
         include 'page/conn.php';
         $name = $_POST["name"];
-        $Email = $_POST["Email"];
-        $pass = $_POST["pass"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
         $cpass = $_POST["cpass"];
         $exists = false;
-        if(($pass == $cpass) && $exists == false){
-            $sql ="INSERT INTO `users` (`sno`, `name`, `Email`, `pass`)
-             VALUES (NULL, '$name ', '$Email', '$pass')";
+        if(($password == $cpass) && $exists == false){
+            $sql ="INSERT INTO `users` (`id`, `name`, `email`, `password`)
+             VALUES (NULL, '$name', '$email', '$password')";
              $result= mysqli_query($conn,$sql);
              if ($result){
                          $showAlert = true;
@@ -83,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <div class="text-center">
                                      <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                         </div>
-                                        <form class="user" action="register.php" method="POST">
+                                        <form class="user" action="" method="POST">
                                      <div class="form-group row">
                                         <div class="col-sm-12 mb-sm-0">
                                             <input type="text" class="form-control form-control-user" id="name" name="name"
@@ -92,13 +92,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                          
                                     </div>
                                      <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="Email" name="Email"
+                                    <input type="email" class="form-control form-control-user" id="email" name="email"
                                         placeholder="Email Address">
                                  </div>
                                       <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="pass"  name ="pass"placeholder="Password">
+                                            id="password"  name ="password"placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
@@ -106,7 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     </div>
                                 </div>
                                
-                                <button type="submit"  class="btn btn-primary btn-user btn-block">Register Account</button>
+                                <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
                             </form>
                             <hr>
                             <div class="text-center">

@@ -1,3 +1,5 @@
+
+
 <?php include ('page/conn.php');?>
 <?php  //include ('log.php');?>
 
@@ -13,28 +15,20 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
         include 'page/conn.php';
        
           $name = $_POST ["name"];
-          $pass = $_POST["pass"];
+          $password = $_POST["password"];
           
-
-          $sql= "SELECT * FROM users WHERE name ='$name' AND pass ='$pass'";
+          $sql= "SELECT * FROM users WHERE name ='$name' AND password ='$password'";
           
-            $result= mysqli_query($conn , $sql);
+            $result= mysqli_query($conn,$sql);
             $num= mysqli_num_rows($result);
-             if ($num == 1)
-                {
-                    //while($row = mysqli_fetch_assoc($result)){
-                    //if (password_verify($pass, $row['pass'])){ 
+             if ($num == 1) 
+             {
                         $login = true;
                         $_SESSION['loggedin'] = true;
                         $_SESSION['successMessage'] = 'Login successfull';
                         $_SESSION['name']= $name;
-                        $_SESSION['pass']= $pass;
+                        $_SESSION['password']= $password;
                         header("Location: index.php");
-    
-                    // }else{
-                    //     $showError="Invalid";
-                    // }
-                    //}
                 }
                 else{
                     $_SESSION['loggedin'] = false;
@@ -85,8 +79,8 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                            <!-- // <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
                             <div class="col-lg-12">
                                 <?php
-                                
-                                    if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true){
+                                    // print_r($_SESSION);exit;
+                                    if( isset($_SESSION['loginErrorMessage']) ){
                                         showError();
                                         session_destroy();
                                     }
@@ -95,28 +89,28 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" action="index.php" method="POST">
+                                    <form class="user" action="" method="POST">
                                         <div class="form-group">
                                             <input type="name" class="form-control form-control-user"
                                                 id="name" name="name" 
                                                 placeholder="Enter name...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="pass" name="pass" placeholder="password">
+                                             </div>
+                                             <div class="form-group">
+                                                <input type="password" class="form-control form-control-user"
+                                                id="password" name="password" placeholder="password">
                                                 
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
+                                             </div>
+                                             <div class="form-group">
+                                                <div class="custom-control custom-checkbox small">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                    <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
-                                            </div>
-                                        </div>
-                                        <!-- <a href="index.php" class="btn btn-primary btn-user btn-block"> 
-                                            Login
-                                        </a> -->
-                                        <button type="submit" class="btn btn-primary">Login</button>
+                                                </div>
+                                             </div>
+                                                <!-- <a href="index.php" class="btn btn-primary btn-user btn-block"> 
+                                                Login
+                                                 </a> -->
+                                            <button type="submit" class="btn btn-primary">Login</button>
                                     </form>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.php">Forgot Password?</a>
@@ -129,9 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
     </div>
@@ -147,5 +139,4 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
     <script src="js/sb-admin-2.min.js"></script>
 <?php //session_destroy(); ?>
 </body>
-
 </html>

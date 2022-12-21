@@ -1,5 +1,8 @@
 
 
+
+
+
 <?php include('page/header.php'); ?>
 <?php include('page/conn.php');  ?>
 <?php include ('saveUsers.php'); ?> 
@@ -18,39 +21,40 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <form class="user" action="tables.php" method="post">
-        <input type="hidden" name="snoEdit" id="snoEdit">
+        <form   class="user" action="tables.php" method="post" >
+        <input type="hidden" name="idEdit" id="idEdit">
 
-                                        <div class="form-group">
-                                        <label for="name">Username:</label>
-                                            <input type="text" class="form-control "
-                                                id="nameEdit" 
-                                                name="nameEdit"placeholder="Username">
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="name">Email:</label>
-                                            <input type="email" class="form-control "
-                                                id="EmailEdit" aria-describedby="emailHelp"
-                                                name="EmailEdit"placeholder="Enter Email Address...">
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="name">Status:</label>
-                                        <select id="StatusEdit" class="form-control"  name="StatusEdit" placeholder="Status">
-                                                <option value="status">Status</option>
-                                                <option value ="active">Active</option>
-                                                <option value ="deactive">Deactive</option> 
-                                        </select>
-                                        </div>
-                                        <div class="form-group">
-                                        <label for="pass">User role:</label>
-                                        <select id="roleEdit" class="form-control" name="roleEdit" id="roleEdit">
-                                               <option value="user role">Select User Role</option>
-                                               <option value="support">Support</option>
-                                               <option value="developer">Developer</option>
-                                               <option value="tester">Tester</option>
-                                               <option value="network">Network</option>
-                                        </select>
-                                            </div>
+                    <div class="form-group">
+                    <label for="name">Username:</label>
+                        <input type="text" class="form-control "
+                            id="nameEdit" 
+                            name="nameEdit"placeholder="Username" >
+                    </div>
+                    <div class="form-group">
+                    <label for="name">Email:</label>
+                        <input type="email" class="form-control "
+                            id="emailEdit" aria-describedby="emailHelp"
+                            name="emailEdit"placeholder="Enter Email Address..." >
+                    </div>
+                    <div class="form-group">
+                    <label for="name">Status:</label>
+                    <select id="statusEdit" class="form-control"  name="statusEdit" placeholder="Status"  >
+                            <option value="status">Status</option>
+                            <option value ="active" >Active</option>
+                            <option value ="deactive">Deactive</option> 
+
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label for="pass">User role:</label>
+                    <select id="roleEdit" class="form-control" name="roleEdit" id="roleEdit" >
+                            <option value="user role">Select User Role</option>
+                            <option value="support">Support</option>
+                            <option value="developer">Developer</option>
+                            <option value="tester">Tester</option>
+                            <option value="network">Network</option>
+                    </select>
+                        </div>
           <div class="modal-footer d-block mr-auto">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -61,9 +65,7 @@
   </div>
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Users</h1>
-                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
+        
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -75,50 +77,54 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>SNo</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
+                                            <th>id</th>
+                                            <th>name</th>
+                                            <th>email</th>
                                             <th>status</th>
                                             <th>user role</th>
-                                            <th>Modify</th>
-
+                                            <th>modify</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>SNo</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
+                                            <th>id</th>
+                                            <th>name</th>
+                                            <th>email</th>
                                             <th>status</th>
                                             <th>user role</th>
-                                            <th>Modify</th>
-
-                                        </tr>
+                                            <th>modify</th>
+                                          </tr>
                                     </tfoot>
                                     <tbody>
 
                                     <?php 
-        //   $sql = "SELECT * FROM `users`"; 
-          $sql= "SELECT * FROM `users` ORDER BY `sno` DESC";
- // $sql= "INSERT INTO `users` (`sno`, `name`, `Email`, `Status`, `role`) VALUES ( NULL, 'nikhil', ' nikhil@gmail.com', 'Active', 'Tester')";
+                                          //   $sql = "SELECT * FROM `users`"; 
+                                            $sql= "SELECT * FROM `users` ORDER BY `id` DESC";
 
-          $result = mysqli_query($conn, $sql);
-          $sno = 0;
-       
-          while($row = mysqli_fetch_assoc($result)){
-             $sno = $sno + 1;
-            echo "<tr>
-            <th scope='row'>". $sno . "</th>
-            <td>". $row['name'] . "</td>
-            <td>". $row['Email'] . "</td>
-            <td>". $row['Status'] . "</td>
-            <td>". $row['role'] . "</td>
-            <td> <button class='edit btn btn-sm btn-primary' id=".$row['sno'].">Edit</button> 
-            <button class='delete btn btn-sm btn-primary' id=d".$row['sno'].">Delete</button>  </td>
-          </tr>";
-        } 
-          ?>
-            
+                                            $result = mysqli_query($conn, $sql);
+                                            $id = 0;
+                                            while($row = mysqli_fetch_assoc($result)){
+                                              $id = $id + 1;
+
+                                              if ($row['status'] == 1){
+                                                $status = "Active";
+                                              }else if ($row['status'] == 0){
+                                                $status =  "Deactive";
+                                              }else{ 
+                                                $status = "NA";
+                                              }
+                                              echo "<tr>
+                                              <th scope='row'>". $id . "</th>
+                                              <td>". $row['name'] . "</td>
+                                              <td>". $row['email'] . "</td>
+                                              <td>".$status."</td>
+                                              <td>". $row['role'] . "</td>
+                                               <td> <button class='edit btn btn-sm btn-primary' id=".$row['id'].">Edit</button> 
+                                               <button class='delete btn btn-sm btn-primary' id=d".$row['id'].">Delete</button>  </td>
+                                               </tr>";
+                                          } 
+                                    ?>
+                                   
                                 </table>
                             </div>
                         </div>
@@ -190,19 +196,19 @@
     <script>
     edits = document.getElementsByClassName('edit');
     Array.from(edits).forEach((element) => {
-      element.addEventListener("click", (e) => {
-        console.log("edit ");
+      element.addEventListener("click",  (e) => {
+        console.log("edit");
         tr = e.target.parentNode.parentNode;
         name = tr.getElementsByTagName("td")[0].innerText;
-        Email = tr.getElementsByTagName("td")[1].innerText;
-        Status = tr.getElementsByTagName("td")[2].innerText;
+        email = tr.getElementsByTagName("td")[1].innerText;
+        status = tr.getElementsByTagName("td")[2].innerText;
         role = tr.getElementsByTagName("td")[3].innerText;
-        console.log(name, Email,Status,role);
+        console.log(name, email,status,role);
         nameEdit.value = name;
-        EmailEdit.value = Email;
-        StatusEdit.value = Status;
+        emailEdit.value = email;
+        statusEdit.value = status;
         roleEdit.value = role;
-        snoEdit.value = e.target.id;
+        idEdit.value = e.target.id;
         console.log(e.target.id)
         $('#editModal').modal('toggle');
       })
@@ -212,12 +218,11 @@
     Array.from(deletes).forEach((element) => {
       element.addEventListener("click", (e) => {
         console.log("delete ");
-        sno = e.target.id.substr(1);
+        id = e.target.id.substr(1);
 
         if (confirm("Are you sure you want to delete this note!")) {
           console.log("yes");
-        //   window.location = `tables.php?delete= ${sno}`;
-          window.location = `tables.php?delete=${sno}`;
+          window.location = `tables.php?delete=${id}`;
         //  window.location = `tables.php`;
 
 

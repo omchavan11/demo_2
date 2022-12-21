@@ -1,13 +1,12 @@
 
 <?php
-
 session_start();
 
 function showError()
 {
     $loginErrorMessage  = $_SESSION['loginErrorMessage'];
 
-    if($_SESSION['loggedin'] == false){
+    if(empty($_SESSION['loggedin'])){
 
         echo    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Error!</strong> '. $loginErrorMessage.'
@@ -22,6 +21,7 @@ function showError()
 
 function showSuccess()
 {
+    // print_r($_SESSION);exit;
     $successMessage  = $_SESSION['successMessage'];
 
     if($_SESSION['loggedin'] == true && $successMessage !=''){
@@ -33,22 +33,11 @@ function showSuccess()
                     </button>
                 </div>'; 
 
-    $_SESSION['successMessage'] = '';
+        $_SESSION['successMessage'] = '';
     }
     
 }
         
-function logout()
-{
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-   // session_start();
-
-    session_distroy();
-    header("Location:login.php");
-    }
-}
-
-
-
+  
 
 ?>
