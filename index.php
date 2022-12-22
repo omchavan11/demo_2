@@ -5,6 +5,7 @@
 <?php
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true){
         $_SESSION['loginErrorMessage'] = 'Unauthorized';
+        
         // $_SESSION['loggedin'] = false;
         echo ' <script> location.replace("login.php"); </script>'; exit;
     }else if( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
