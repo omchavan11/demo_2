@@ -89,21 +89,21 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" action="" method="POST">
+                                    <form class="user  was-validated" action="" method="POST"  novalidate>
                                         <div class="form-group">
                                             <input type="name" class="form-control form-control-user"
                                                 id="name" name="name" 
-                                                placeholder="Enter name...">
+                                                placeholder="Enter name..." required>
                                              </div>
                                              <div class="form-group">
                                                 <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="password">
+                                                id="password" name="password" placeholder="password" required>
                                                 
                                              </div>
                                              <div class="form-group">
                                                 <div class="custom-control custom-checkbox small">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                    <label class="custom-control-label" for="customCheck">Remember
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck" required>
+                                                    <label class="custom-control-label" for="customCheck" >Remember
                                                     Me</label>
                                                 </div>
                                              </div>
@@ -137,6 +137,28 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script> 
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+    </script>
 <?php //session_destroy(); ?>
 </body>
 </html>

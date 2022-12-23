@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <div class="text-center">
                                      <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                         </div>
-                                        <form class="user" action="" method="POST">
+                                        <form class="user was-validated " action="" method="POST" name=" novalidate">
                                      <div class="form-group row">
                                         <div class="col-sm-12 mb-sm-0">
                                             <input type="text" class="form-control form-control-user" id="name" name="name"
@@ -102,7 +102,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="cpass" name="cpass" placeholder="Repeat Password" required>
+                                            id="cpass" name="cpass" placeholder="Repeat Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
+                                            required>
                                     </div>
                                 </div>
                                
@@ -134,65 +136,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- <script>
-        var myInput = document.getElementById("password");
-        var letter = document.getElementById("letter");
-        var capital = document.getElementById("capital");
-        var number = document.getElementById("number");
-        var length = document.getElementById("length");
+    <script> 
+        (function () {
+            'use strict'
 
-        // When the user clicks on the password field, show the message box
-        myInput.onfocus = function() {
-        document.getElementById("message").style.display = "block";
-        }
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
 
-        // When the user clicks outside of the password field, hide the message box
-        myInput.onblur = function() {
-        document.getElementById("message").style.display = "none";
-        }
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
 
-        // When the user starts to type something inside the password field
-        myInput.onkeyup = function() {
-        // Validate lowercase letters
-        var lowerCaseLetters = /[a-z]/g;
-        if(myInput.value.match(lowerCaseLetters)) {  
-            letter.classList.remove("invalid");
-            letter.classList.add("valid");
-        } else {
-            letter.classList.remove("valid");
-            letter.classList.add("invalid");
-        }
-        
-        // Validate capital letters
-        var upperCaseLetters = /[A-Z]/g;
-        if(myInput.value.match(upperCaseLetters)) {  
-            capital.classList.remove("invalid");
-            capital.classList.add("valid");
-        } else {
-            capital.classList.remove("valid");
-            capital.classList.add("invalid");
-        }
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+    </script>
 
-        // Validate numbers
-        var numbers = /[0-9]/g;
-        if(myInput.value.match(numbers)) {  
-            number.classList.remove("invalid");
-            number.classList.add("valid");
-        } else {
-            number.classList.remove("valid");
-            number.classList.add("invalid");
-        }
-        
-        // Validate length
-        if(myInput.value.length >= 8) {
-            length.classList.remove("invalid");
-            length.classList.add("valid");
-        } else {
-            length.classList.remove("valid");
-            length.classList.add("invalid");
-        }
-        }
-        </script> -->
+   
 
 </body>
 

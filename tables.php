@@ -123,10 +123,14 @@
                                                <button class='delete btn btn-sm btn-primary' id=d".$row['id'].">Delete</button>  </td>
                                                </tr>";
                                           } 
+                                          
                                     ?>
-                                   
                                 </table>
-                            </div>
+                                <div class ="text-right">
+                                <!-- <button class="submit" value="submit" class="btn btn-primary center"> Export in Excel</button> -->
+                                          <a href=" page/export1.php" class="href btn btn-primary "  > Export in Excel</a>
+                                        </div>
+                                        </div>
                         </div>
                     </div>
                 </div>
